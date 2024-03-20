@@ -4,10 +4,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ChooseForm } from "../ChooseForm";
 import { Routes, Route } from "react-router";
+import { GravityForce } from "../GravityForce";
 
 const App: FC = () => {
   return (
     <Routes>
+      <Route path="/gravityforce" element={<GravityForce />} />
       <Route
         path="/"
         element={
