@@ -1,21 +1,33 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 
 import { RedirectButton } from "../RedirectButton";
 import Button from "@mui/material/Button";
 import { Find } from "./Find";
 import type { TGravityVars } from "./types";
+import { ConvertNuton } from "../ConvertNuton";
+import { ConvertKG } from "../ConvertKG";
 
 const GravityForce: FC = () => {
-  const [variable, setVariable] = useState(<></>);
+  const [variableComponent, setVariableComponent] = useState(<></>);
   const [result, setResult] = useState<number>(0);
+  const [convertAnswer, setConvertAnswer] = useState<number>(0);
   const vars: TGravityVars = { F: "Сила", m: "Масса" };
   const keys: Array<string> = Object.keys(vars);
+  const answerLetter = useRef("");
 
   return (
-    <Box sx={{ margin: "16px auto" }}>
+    <Box
+      sx={{
+        margin: "16px auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "16px",
+      }}
+    >
       <RedirectButton />
       <MathJaxContext>
         <MathJax>{"Формула силы тяжести: \\(F=m*g\\)"}</MathJax>
@@ -35,8 +47,9 @@ const GravityForce: FC = () => {
               key={elem}
               variant="outlined"
               onClick={() => {
-                setVariable(
-                  <Find whatFind={elem} names={vars} setResult={setResult} />
+                answerLetter.current = elem;
+                setVariableComponent(
+                  <Find whatFind={elem} setResult={setResult} />
                 );
               }}
             >
@@ -45,8 +58,28 @@ const GravityForce: FC = () => {
           );
         })}
       </Box>
-      {variable}
-      {result !== 0 && result}
+      {variableComponent}
+      {result !== 0 && (
+        <Box
+          sx={{
+            display: "flex",
+            gap: "16px",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="inherit">
+            Ответ: {answerLetter.current} = {result * 10 ** convertAnswer}
+          </Typography>
+          {answerLetter.current === "F" ? (
+            <ConvertNuton
+              convert={convertAnswer}
+              setConvert={setConvertAnswer}
+            />
+          ) : (
+            <ConvertKG convert={convertAnswer} setConvert={setConvertAnswer} />
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

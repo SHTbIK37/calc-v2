@@ -7,13 +7,14 @@ import Button from "@mui/material/Button";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 import { constants } from "../../../utils/constants";
-import type { TGravityVars } from "../types";
+import { ConvertKG } from "../../ConvertKG";
+import { ConvertNuton } from "../../ConvertNuton";
 
 const Find: FC<{
   whatFind: string;
-  names: TGravityVars;
   setResult: Dispatch<SetStateAction<number>>;
-}> = ({ whatFind, names, setResult }) => {
+}> = ({ whatFind, setResult }) => {
+  const [convert, setConvert] = useState<number>(0);
   const [vars, setVars] = useState({ m: 0, F: 0 });
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setVars((prevData) => ({
@@ -22,21 +23,23 @@ const Find: FC<{
     }));
   };
   const handleClick = () => {
-    console.log(vars);
-    console.log(whatFind);
-    if (whatFind === "m") setResult(vars.F / constants.g);
-    if (whatFind === "F") {
-      console.log(2);
-      setResult(vars.m * constants.g);
-    }
+    if (whatFind === "m") setResult((vars.F * 10 ** convert) / constants.g);
+    if (whatFind === "F") setResult(vars.m * constants.g * 10 ** convert);
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        alignItems: "center",
+      }}
+    >
       <Typography variant="inherit" color="initial">
         Введите значения:
       </Typography>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
         <MathJaxContext>
           <MathJax>{`\\(${whatFind === "F" ? "m" : "F"}\\)=`}</MathJax>
         </MathJaxContext>
@@ -47,6 +50,11 @@ const Find: FC<{
           label={whatFind === "F" ? "Масса" : "Сила"}
           defaultValue={0}
         />
+        {whatFind === "F" ? (
+          <ConvertKG convert={convert} setConvert={setConvert} />
+        ) : (
+          <ConvertNuton convert={convert} setConvert={setConvert} />
+        )}
       </Box>
       <Button onClick={handleClick} variant="outlined">
         Ok
