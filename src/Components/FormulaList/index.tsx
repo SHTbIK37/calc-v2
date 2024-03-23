@@ -11,6 +11,7 @@ const FormulaList: FC<TFormulaListProps> = (props) => {
           return <FormulaLink key={elem.href} elem={elem} />;
         if (elem.name.toLowerCase().includes(props.formulaSearch.toLowerCase()))
           return <FormulaLink key={elem.href} elem={elem} />;
+        return null;
       })}
     </Box>
   );
