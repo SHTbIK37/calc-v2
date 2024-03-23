@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { useEffect, useRef, useState, type FC } from "react";
+import { useRef, useState, type FC } from "react";
 
 import { RedirectButton } from "../RedirectButton";
 import Button from "@mui/material/Button";
