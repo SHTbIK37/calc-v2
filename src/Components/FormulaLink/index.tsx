@@ -1,6 +1,7 @@
 import { type FC } from "react";
 import Link from "@mui/material/Link";
 import { TFromulaLinkProps } from "./types";
+import { Link as RLink } from "react-router-dom";
 const FormulaLink: FC<TFromulaLinkProps> = (props) => {
   return (
     <Link
@@ -13,9 +14,9 @@ const FormulaLink: FC<TFromulaLinkProps> = (props) => {
       color="black"
       variant="subtitle1"
       underline="hover"
-      href={props.elem.href}
+      // href={props.elem.href}
     >
-      {props.elem.name}
+      <RLink to={props.elem.href}>{props.elem.name}</RLink>
     </Link>
   );
 };
