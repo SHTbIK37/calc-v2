@@ -2,7 +2,7 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import Box from "@mui/material/Box";
 import type { Dispatch, FC, SetStateAction } from "react";
 
-const ConvertNuton: FC<{
+const AnswerKG: FC<{
   setConvert: Dispatch<SetStateAction<number>>;
   convert: number;
 }> = ({ setConvert, convert }) => {
@@ -11,12 +11,12 @@ const ConvertNuton: FC<{
   };
   return (
     <Box>
-      <Select onChange={handleChange} name={"Nuton"} value={convert}>
-        <MenuItem value={-3}>мНьютон</MenuItem>
-        <MenuItem value={0}>Ньютон</MenuItem>
-        <MenuItem value={3}>КНьютон</MenuItem>
+      <Select onChange={handleChange} name={"KG"} value={convert}>
+        <MenuItem value={3}>мг</MenuItem>
+        <MenuItem value={0}>Кг</MenuItem>
+        <MenuItem value={-3}>Тонна</MenuItem>
       </Select>
     </Box>
   );
 };
-export { ConvertNuton };
+export { AnswerKG };

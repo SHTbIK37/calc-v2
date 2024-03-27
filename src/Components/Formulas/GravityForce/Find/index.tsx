@@ -6,9 +6,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 
-import { constants } from "../../../utils/constants";
-import { ConvertKG } from "../../ConvertKG";
-import { ConvertNuton } from "../../ConvertNuton";
+import { constants } from "../../../../utils/constants";
+import { ConvertKG } from "../../../Convert/ConvertKG";
+import { ConvertN } from "../../../Convert/ConvertN";
 
 const Find: FC<{
   whatFind: string;
@@ -53,7 +53,7 @@ const Find: FC<{
         {whatFind === "F" ? (
           <ConvertKG convert={convert} setConvert={setConvert} />
         ) : (
-          <ConvertNuton convert={convert} setConvert={setConvert} />
+          <ConvertN convert={convert} setConvert={setConvert} />
         )}
       </Box>
       <Button onClick={handleClick} variant="outlined">

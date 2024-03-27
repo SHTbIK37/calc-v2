@@ -1,14 +1,14 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 
-import { RedirectButton } from "../RedirectButton";
+import { RedirectButton } from "../../RedirectButton";
 import Button from "@mui/material/Button";
 import { Find } from "./Find";
 import type { TGravityVars } from "./types";
-import { ConvertNuton } from "../ConvertNuton";
-import { ConvertKG } from "../ConvertKG";
+import { AnswerN } from "../../AnswersConvert/AnswerN";
+import { AnswerKG } from "../../AnswersConvert/AnswerKG";
 
 const GravityForce: FC = () => {
   const [variableComponent, setVariableComponent] = useState(<></>);
@@ -17,7 +17,9 @@ const GravityForce: FC = () => {
   const vars: TGravityVars = { F: "Сила", m: "Масса" };
   const keys: Array<string> = Object.keys(vars);
   const answerLetter = useRef("");
-
+  useEffect(() => {
+    setResult(0);
+  }, [variableComponent]);
   return (
     <Box
       sx={{
@@ -34,7 +36,7 @@ const GravityForce: FC = () => {
         <MathJax>{"\\(F\\) - Сила тяжести"}</MathJax>
         <MathJax>{"\\(m\\) - Масса тела"}</MathJax>
         <MathJax>
-          {"\\(g\\) - Гравитационная постоянная = \\(9.80665м/с^2\\)"}
+          {"\\(g\\) - Гравитационная постоянная = \\(9,80665м/с^2\\)"}
         </MathJax>
       </MathJaxContext>
       <Typography variant="inherit" color="initial">
@@ -68,15 +70,16 @@ const GravityForce: FC = () => {
           }}
         >
           <Typography variant="inherit">
-            Ответ: {answerLetter.current} = {result * 10 ** convertAnswer}
+            Ответ: {answerLetter.current} ={" "}
+            {(result * 10 ** convertAnswer)
+              .toFixed(3)
+              .toString()
+              .replace(".", ",")}
           </Typography>
           {answerLetter.current === "F" ? (
-            <ConvertNuton
-              convert={convertAnswer}
-              setConvert={setConvertAnswer}
-            />
+            <AnswerN convert={convertAnswer} setConvert={setConvertAnswer} />
           ) : (
-            <ConvertKG convert={convertAnswer} setConvert={setConvertAnswer} />
+            <AnswerKG convert={convertAnswer} setConvert={setConvertAnswer} />
           )}
         </Box>
       )}
