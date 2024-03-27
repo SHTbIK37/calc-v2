@@ -1,5 +1,5 @@
 export type TGravityVars = {
-  F: string;
-  m: string;
-  [key: string]: string;
+  F: number;
+  m: number;
+  [key: string]: number;
 };

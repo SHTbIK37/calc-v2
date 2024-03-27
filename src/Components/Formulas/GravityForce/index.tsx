@@ -13,8 +13,11 @@ import { AnswerKG } from "../../AnswersConvert/AnswerKG";
 const GravityForce: FC = () => {
   const [variableComponent, setVariableComponent] = useState(<></>);
   const [result, setResult] = useState<number>(0);
-  const [convertAnswer, setConvertAnswer] = useState<number>(0);
-  const vars: TGravityVars = { F: "Сила", m: "Масса" };
+  const [convertAnswer, setConvertAnswer] = useState<TGravityVars>({
+    F: 0,
+    m: 0,
+  });
+  const vars = { F: "Сила", m: "Масса" };
   const keys: Array<string> = Object.keys(vars);
   const answerLetter = useRef("");
   useEffect(() => {
@@ -71,16 +74,17 @@ const GravityForce: FC = () => {
         >
           <Typography variant="inherit">
             Ответ: {answerLetter.current} ={" "}
-            {(result * 10 ** convertAnswer)
-              .toFixed(3)
+            {((result * 10 ** convertAnswer[answerLetter.current]) as number)
+              .toFixed(5)
               .toString()
               .replace(".", ",")}
           </Typography>
           {answerLetter.current === "F" ? (
-            <AnswerN convert={convertAnswer} setConvert={setConvertAnswer} />
-          ) : (
-            <AnswerKG convert={convertAnswer} setConvert={setConvertAnswer} />
-          )}
+            <AnswerN convert={convertAnswer.F} setConvert={setConvertAnswer} />
+          ) : null}
+          {answerLetter.current === "m" ? (
+            <AnswerKG convert={convertAnswer.m} setConvert={setConvertAnswer} />
+          ) : null}
         </Box>
       )}
     </Box>

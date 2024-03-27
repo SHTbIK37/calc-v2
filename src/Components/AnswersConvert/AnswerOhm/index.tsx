@@ -12,12 +12,13 @@ const AnswerOhm: FC<{
       [event.target.name]: event.target.value,
     }));
   };
+  console.log(1);
   return (
     <Box>
       <Select onChange={handleChange} name={"R"} value={convert}>
-        <MenuItem value={-3}>мОм</MenuItem>
+        <MenuItem value={3}>мОм</MenuItem>
         <MenuItem value={0}>Ом</MenuItem>
-        <MenuItem value={3}>КОм</MenuItem>
+        <MenuItem value={-3}>КОм</MenuItem>
       </Select>
     </Box>
   );

@@ -15,9 +15,9 @@ const AnswerVol: FC<{
   return (
     <Box>
       <Select onChange={handleChange} name={"U"} value={convert}>
-        <MenuItem value={3}>мОм</MenuItem>
-        <MenuItem value={0}>Ом</MenuItem>
-        <MenuItem value={-3}>КОм</MenuItem>
+        <MenuItem value={3}>мВ</MenuItem>
+        <MenuItem value={0}>В</MenuItem>
+        <MenuItem value={-3}>КВ</MenuItem>
       </Select>
     </Box>
   );

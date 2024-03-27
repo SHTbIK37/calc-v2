@@ -75,7 +75,7 @@ const OhmLow: FC = () => {
           <Typography variant="inherit">
             Ответ: {answerLetter.current} ={" "}
             {((result * 10 ** convertAnswer[answerLetter.current]) as number)
-              .toFixed(3)
+              .toFixed(5)
               .toString()
               .replace(".", ",")}
           </Typography>
@@ -86,10 +86,12 @@ const OhmLow: FC = () => {
             />
           ) : null}
           {answerLetter.current === "R" ? (
-            <AnswerOhm
-              convert={convertAnswer.R}
-              setConvert={setConvertAnswer}
-            />
+            <>
+              <AnswerOhm
+                convert={convertAnswer.R}
+                setConvert={setConvertAnswer}
+              />
+            </>
           ) : null}
           {answerLetter.current === "I" ? (
             <AnswerAmp

@@ -10,10 +10,20 @@ const FormulaLink: FC<TFromulaLinkProps> = (props) => {
         border: "1px solid #3f50b5",
         borderRadius: "8px",
         textAlign: "center",
+        minHeight: "32px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
       color="black"
     >
-      <RLink style={{ textDecoration: "none" }} to={props.elem.href}>
+      <RLink
+        style={{
+          textDecoration: "none",
+          lineHeight: 1,
+        }}
+        to={props.elem.href}
+      >
         {props.elem.name}
       </RLink>
     </Box>
